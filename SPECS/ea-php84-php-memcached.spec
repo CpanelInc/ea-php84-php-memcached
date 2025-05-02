@@ -14,11 +14,15 @@ URL: https://pecl.php.net/package/memcached
 Source: v%{version}.tar.gz
 Source1: memcached.ini
 
-# should be no requires for building this package
-#Requires: memcached
-Requires: ea-libmemcached
 BuildRequires: cyrus-sasl-devel
+
+%if 0%{?rhel} >= 10
+BuildRequires: autotools-latest
+BuildRequires: autotools-latest-m4
+%else
 BuildRequires: autotools-latest-autoconf
+%endif
+
 BuildRequires: ea-libmemcached ea-libmemcached-devel
 BuildRequires: %{scl_version}
 Requires: %{scl_version}-php-common
